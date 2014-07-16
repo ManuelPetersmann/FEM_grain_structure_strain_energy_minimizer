@@ -125,13 +125,13 @@ time.sleep(60)
 
 #-----< EVALUATE ALL jobs and SET PARAMETERS for the transformation of the next grain >---#   
 if martensiteAmount == 1: 
-	evaluationData = automate.findMinimumEnergy( austeniteGrains, martensiteAmount, \
+	evaluationData = automate.find_minimum_energy( austeniteGrains, martensiteAmount, \
 	                                               laminateVariants, preselection) 
 	# evaluationData =  [0-delta_G, 1-GrainNr, 2-GrainLaminate, 3-GrainVol,   
 	#             4-dragEner_spec, 5-delta_totalStrain_spec,   6-total_strainEner_cell]
 	chemical_drivingForce = max( evaluationData )[0] # note that this is a negative value
 else:
-	evaluationData = automate.findMinimumEnergy(austeniteGrains, martensiteAmount,\
+	evaluationData = automate.find_minimum_energy(austeniteGrains, martensiteAmount,\
 	                                         laminateVariants, preselection, selected_variants, \
 	                                         total_strainEner_cell_before, chemical_drivingForce)
 # # the optimum grain is that with minimum delta_G
