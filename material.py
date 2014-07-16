@@ -11,7 +11,7 @@ def eigenstrains():
     """ initializes the matrices representing the transformation strains"""
     stress_driving_forces = []
     # transformation strain components
-    [v, u, w] = [0.0381, 0.0234 0.1186]
+    [v, u, w] = [0.0381, 0.0234, 0.1186]
     # e1 corresponds to laminate 1, e2 to laminate 2 etc.
     e1 = [u, -v, u, 0, -w, 0]
     e2 = [u, u, -v, w, 0, 0]
