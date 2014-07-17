@@ -21,14 +21,15 @@ def preselect(total_grain_amount, martensite_amount):
     if martensite_amount < int(total_grain_amount * .7):
         calc_fraction = (1. / 7)
 
-    if martensite_amount >= int(total_grain_amount * .7) and martensite_amount < int(total_grain_amount * .9):
+    if int(total_grain_amount * .7) <= martensite_amount < int(total_grain_amount * .9):
         calc_fraction = (1. / 5)
 
-    if martensite_amount >= int(total_grain_amount * .9) and martensite_amount < int(total_grain_amount * .94):
+    if int(total_grain_amount * .9) <= martensite_amount < int(total_grain_amount * .94):
         calc_fraction = (1. / 2)
 
     if martensite_amount >= int(total_grain_amount * .95):
         calc_fraction = 1
+
     deltas = []
 
     # variant_preselection is taken from the last state in which
@@ -49,6 +50,7 @@ def preselect(total_grain_amount, martensite_amount):
     deltas.reverse()  # reverse to get descending sort
     amount = int(len(deltas) * calc_fraction)
     deltas = deltas[0: amount]
+
     preselection = []
     for i in deltas:
         preselection.append([int(i[1]), int(i[2])])  # [grainNr, laminate]
@@ -60,6 +62,7 @@ def submitjobs(austenite_grains, martensite_amount, laminate_variants, preselect
     #
     wait_array = []
     job_nr_ = 0
+
     #
     for austenite_grain in austenite_grains:
         for laminate in laminate_variants:
@@ -84,7 +87,7 @@ def submitjobs(austenite_grains, martensite_amount, laminate_variants, preselect
                     process = psutil.Process(pid)
                     wait_array.append(process)
                 #
-                if job_nr_ % 6 == 0 or (preselection == True and job_nr_ == len(selected_variants) ):
+                if job_nr_ % 6 == 0 or (preselection and job_nr_ == len(selected_variants)):
                     for iprocess in wait_array:
                         try:
                             iprocess.wait(timeout)
@@ -107,7 +110,7 @@ def find_minimum_energy(austenite_grains, martensite_amount, laminate_variants, 
     #
     for austenite_grain in austenite_grains:
         for laminate in laminate_variants:
-            if ( [austenite_grain[0], laminate] in selected_variants) or preselection == False:
+            if ([austenite_grain[0], laminate] in selected_variants) or not preselection:
                 #
                 odbname = 'Outputfile_' + str(martensite_amount) + '_' + str(austenite_grain[0]) + \
                           '_' + str(laminate) + '.odb'
@@ -205,7 +208,8 @@ def evaluate_odb(odbname, var=0):
         total_strain_energy = total_strain_energy + grain_sener_sum
 
         # the volume of the matrix must not be considered for the random RVE cell !
-        if 'TRANSIG' in set_name: ivol_total = ivol_total + grain_ges_ivol
+        if 'TRANSIG' in set_name:
+            ivol_total = ivol_total + grain_ges_ivol
 
         #
         # additionally calculate the strain energy developement in each phase respectively
@@ -222,33 +226,25 @@ def evaluate_odb(odbname, var=0):
             # initialize transformation strains
             transforming_strains = eigenstrains()
             # Define average "effective" stress tensor components
-            sig_eff_11 = sig_eff_22 = sig_eff_33 = sig_eff_12 = sig_eff_13 = sig_eff_23 = 0
+
+            sigma = [0, 0, 0, 0, 0, 0] #converted from sigma = [sig_eff_11, sig_eff_22, sig_eff_33, sig_eff_12, sig_eff_13, sig_eff_23]
             #
-            for i in range(len(set_stresses.values)):
-                grain_ges_ivol = grain_ges_ivol + set_ivol.values[i].data
-                #
-                sig_eff_11 = sig_eff_11 + set_stresses.values[i].data[0] * set_ivol.values[i].data
-                sig_eff_22 = sig_eff_22 + set_stresses.values[i].data[1] * set_ivol.values[i].data
-                sig_eff_33 = sig_eff_33 + set_stresses.values[i].data[2] * set_ivol.values[i].data
-                sig_eff_12 = sig_eff_12 + set_stresses.values[i].data[3] * set_ivol.values[i].data
-                sig_eff_13 = sig_eff_13 + set_stresses.values[i].data[4] * set_ivol.values[i].data
-                sig_eff_23 = sig_eff_23 + set_stresses.values[i].data[5] * set_ivol.values[i].data
-            #
-            sig_eff_11 = sig_eff_11 / grain_ges_ivol
-            sig_eff_22 = sig_eff_22 / grain_ges_ivol
-            sig_eff_33 = sig_eff_33 / grain_ges_ivol
-            sig_eff_12 = sig_eff_12 / grain_ges_ivol
-            sig_eff_13 = sig_eff_13 / grain_ges_ivol
-            sig_eff_23 = sig_eff_23 / grain_ges_ivol
-            #
-            sigma = [sig_eff_11, sig_eff_22, sig_eff_33, sig_eff_12, sig_eff_13, sig_eff_23]
+            for i in range(len(sigma)):
+                for j in range(len(set_stresses.values)):
+                    sigma[i] += set_stresses.values[j].data[i] * set_ivol.values[j].data
+
+            for i in range(len(set_stress.values)):
+                grain_ges_ivol += set_ivol.values[i].data
+
+            sigma /= grain_ges_ivol
             sigma = mathutils.fillmatrix(sigma)
+
             #
             spec_grain_drag = forces.calc_draggingForces(grain_ges_ivol)
             for laminate in range(1, 6 + 1):  # = [1,2,3,4,5,6]
                 spec_driving_stress = mathutils.doubledotproduct(transforming_strains[laminate - 1], sigma)
                 check_term = spec_driving_stress - spec_grain_drag
-                if check_term > driving_force
+                if check_term > driving_force:
                     driving_force = check_term
                     found_grain = [set_name, laminate, driving_force]
     odb.close()
