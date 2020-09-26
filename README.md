@@ -9,6 +9,7 @@ and under suitable boundary conditions such as periodic boundary conditions, or 
 <!-- ![test](https://raw.githubusercontent.com/ManuelPetersmann/FEM_grain_structure_strain_energy_minimizer/master/img16.png | width=100)  -->
 
 the given phython scripts transform each grain, one by one, trying out all possible transformation strains a grain can have in the following energy-minimizing manner:
+
 <img src="https://raw.githubusercontent.com/ManuelPetersmann/FEM_grain_structure_strain_energy_minimizer/master/procedure_IEMA.JPG" width="400">
 
 Please cite as:
