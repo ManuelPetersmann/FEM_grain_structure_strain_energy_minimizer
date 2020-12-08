@@ -1,10 +1,10 @@
-FEM grain structure strain energy minimizer
+# FEM grain structure strain energy minimizer
 
 Given a grain structure, where each grain can have 1...N grain different grain strains.
 <img src="https://raw.githubusercontent.com/ManuelPetersmann/FEM_grain_structure_strain_energy_minimizer/master/img17.png" width="400">
 <!-- ![](https://raw.githubusercontent.com/ManuelPetersmann/FEM_grain_structure_strain_energy_minimizer/master/img17.png | width=100)  -->
 
-and under suitable boundary conditions such as periodic boundary conditions, or like here embedding the grain structure inta a matrix
+and under suitable boundary conditions (e.g. periodic boundary conditions, or embedding the grain structure into a matrix like shown here)
 <img src="https://raw.githubusercontent.com/ManuelPetersmann/FEM_grain_structure_strain_energy_minimizer/master/img16.png" width="400">
 <!-- ![test](https://raw.githubusercontent.com/ManuelPetersmann/FEM_grain_structure_strain_energy_minimizer/master/img16.png | width=100)  -->
 
