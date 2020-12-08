@@ -1,6 +1,6 @@
 FEM grain structure strain energy minimizer
 
-Given a grain structure such as like this where each grain can have 1...N grain different grain strains.
+Given a grain structure, where each grain can have 1...N grain different grain strains.
 <img src="https://raw.githubusercontent.com/ManuelPetersmann/FEM_grain_structure_strain_energy_minimizer/master/img17.png" width="400">
 <!-- ![](https://raw.githubusercontent.com/ManuelPetersmann/FEM_grain_structure_strain_energy_minimizer/master/img17.png | width=100)  -->
 
