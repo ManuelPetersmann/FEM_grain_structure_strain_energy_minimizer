@@ -15,12 +15,18 @@ the given phython scripts transform each grain, one by one, trying out all possi
 ## Reference
 If you've found this useful please consider referencing this repository in your own work
 ```
-@software{manuel_petersmann_2017a,
-  author       = {Petersmann, M.; Antretter, T.; Waitz, T. & Fischer, F. },
-  title        = {A new approach predicting the evolution of laminated nanostructures-Martensite in NiTi as an example},
-  year         = 2017,
-  publisher    = {Modelling and Simulation in Materials Science and Engineering},
-  doi          = {10.1088/1361-651X/aa5ab4},
-  url          = {https://doi.org/10.1088/1361-651X/aa5ab4}
+@article{Petersmann_2017,
+	doi = {10.1088/1361-651x/aa5ab4},
+	url = {https://doi.org/10.1088/1361-651x/aa5ab4},
+	year = 2017,
+	month = {feb},
+	publisher = {{IOP} Publishing},
+	volume = {25},
+	number = {3},
+	pages = {035004},
+	author = {M Petersmann and T Antretter and T Waitz and F D Fischer},
+	title = {A new approach predicting the evolution of laminated nanostructures{\textemdash}martensite in {NiTi} as an example},
+	journal = {Modelling and Simulation in Materials Science and Engineering},
+	abstract = {A model for laminated nanostructures, combining classical energy minimization with full-field finite element calculations in a computationally fully automated manner, is set up and used to quantitatively analyse the interaction of grains via self-accommodation of their transformation strains. The well established B2–B19’ martensitic phase transformation in nanocrystalline NiTi is treated as an exemplary case to demonstrate our new framework. A systematic search for an optimal energy minimizing transformation path is employed within a full-field model, including crystallographic transformation strains and fully anisotropic elastic constants, by using the Python scripting language. The microstructure is updated based on previous calculation results. The underlying incremental free energy minimization criterion naturally reproduces the transformation kinetics. The sequence of grains subjected to transformation as well as the selection of martensitic variants within the grains are obtained yielding the evolution of the total interface energy as well as the strain energy, dominating our approach.}
 }
 ```
