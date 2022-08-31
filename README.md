@@ -12,7 +12,15 @@ the given phython scripts transform each grain, one by one, trying out all possi
 
 <img src="https://raw.githubusercontent.com/ManuelPetersmann/FEM_grain_structure_strain_energy_minimizer/master/procedure_IEMA.JPG" width="400">
 
-Please cite as:
-Petersmann, M.; Antretter, T.; Waitz, T. & Fischer, F. 
-A new approach predicting the evolution of laminated nanostructures-Martensite in NiTi as an example
-Modelling and Simulation in Materials Science and Engineering, 2017, 25, 035004 (17p.)
+## Reference
+If you've found this useful please consider referencing this repository in your own work
+```
+@software{lukas_mosser_2022_6961205,
+  author       = {Petersmann, M.; Antretter, T.; Waitz, T. & Fischer, F. },
+  title        = {A new approach predicting the evolution of laminated nanostructures-Martensite in NiTi as an example},
+  year         = 2017,
+  publisher    = {Modelling and Simulation in Materials Science and Engineering},
+  doi          = {10.1088/1361-651X/aa5ab4},
+  url          = {https://doi.org/10.1088/1361-651X/aa5ab4}
+}
+```
