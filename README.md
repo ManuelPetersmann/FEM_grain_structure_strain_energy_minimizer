@@ -15,7 +15,7 @@ the given phython scripts transform each grain, one by one, trying out all possi
 ## Reference
 If you've found this useful please consider referencing this repository in your own work
 ```
-@software{lukas_mosser_2022_6961205,
+@software{manuel_petersmann_2017a,
   author       = {Petersmann, M.; Antretter, T.; Waitz, T. & Fischer, F. },
   title        = {A new approach predicting the evolution of laminated nanostructures-Martensite in NiTi as an example},
   year         = 2017,
